@@ -1,16 +1,31 @@
 const express = require('express');
+const ejs = require('ejs');
+const path = require('path');
 
 const app = express();
 
-app.get('/', (req, res) => {
+//TEMPLATE ENGİNE
+app.set("view engine","ejs"); 
 
-  const photo = {
-    id: 1,
-    name: "Article Name",
-    description: "Article description"
-  }
-  res.send(photo)
+// MIDDLEWARES
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+  res.render('index');
 })
+
+app.get('/about', (req, res) => {
+  res.render('about');
+})
+
+app.get('/add_post', (req, res) => {
+  res.render('add_post');
+})
+
+app.get('/posts', (req, res) => {
+  res.render('posts');
+})
+
 
 const port = 3000;
 app.listen(port, () => {
